@@ -37,27 +37,32 @@ def menu_a_star():
 def menu_sophrega_search():
     pass
 
-
 def menu_uniform_cost(origin, destination):
+    #recebemos as variaveis do input do menu, e convertemos o destino para variavel
+    #para que o possa invocar do graph
     strRoot = origin
     goal = destination
     root = globals()[strRoot]
-    Procura(root, goal)
-
-def Procura(root, goal):
+    # aqui criamos a prirodade de queue dos caminhos
     queue = PriorityQueue()
     queue.put((0, [root]))
+    #com este while vamos iterar os itens que estao na queue
     while not queue.empty():
+        #obter o item de mais alta prioridade
         pair = queue.get()
         current = pair[1][-1]
+        #se for o destino que queremos, devolvemos o caminho
         if current.label == goal:
             print(pair[1])
             return pair[1]
+        #senao vamos adicionar todas as arestas, distancias entre cidades, a queue
         for edge in current.children:
+            #criamos um novo caminho com a cidade e a distancia
             new_path = list(pair[1])
             new_path.append(edge.destination)
+            #depois ligamos o novo caminho a queue com prioridade
             queue.put((pair[0] + edge.cost, new_path))
-pass
+    pass
 
 
 def depth_limited(graph, source_city, destination_city, level_limit):
@@ -129,12 +134,14 @@ def Menu():
 
         verifyCity = False
         while verifyCity == False:
-            destination = input('\nInsira a cidade de destino: ')
-            verifyCity = verifyCityGraph(destination)
+            origin = input('\nInsira a cidade de origem:  ')
+            verifyCity = verifyCityGraph(origin)
+
         verifyCity = False
         while verifyCity == False:
-            origin = input('\nInsira a cidade de origem:  ')
+            destination = input('\nInsira a cidade de destino: ')
             verifyCity = verifyCityGraph(destination)
+
 
         print('1 -------------------- Profundidade Limitada')
         print('2 -------------------- Custo uniforme')

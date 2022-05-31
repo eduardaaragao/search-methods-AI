@@ -1,30 +1,41 @@
 class Node(object):
+    #Classe para definir os vértices/cidades
     def __init__(self, label: str = None):
         self.label = label
         self.children = []
+        #Inicializar um vertice, as cidades neste caso, e definir a sua label para o identificar
 
     def __lt__(self, other):
         return self.label < other.label
+        #Fazer a função de menor que, onde se compara o vertice presente com outro
 
     def __gt__(self, other):
         return self.label > other.label
-
+        #Fazer a função de maior que, onde se compara o vertice presente com outro
     def __repr__(self):
         return '{} -> {}'.format(self.label, self.children)
+        #Funçao que devolve a string no qual vamos ter o vertice que estamos analizar
+        #e os outros vertices ao qual o mesmo esta ligado, neste caso vai ser a cidade
+        #e as cidades as quais esta ligada
 
     def add_child(self, node, cost=1):
         edge = Edge(self, node, cost)
         self.children.append(edge)
+        #adicionar um subvertice, neste caso sao as cidades as quais a cidade a
+        #ser analizada está ligada, onde definimos a distancia e o nome da cidade
 
 class Edge(object):
+    #Classe para definir as arestas/distancia entre cidades
     def __init__(self, source: Node, destination: Node, cost: int = 1):
         self.source = source
         self.destination = destination
         self.cost = cost
-
+        #Funcao para inicializar uma aresta, neste caso a distancia entre cidades
+        #onde definimos a cidade de origem, cidade de destino e a distancia ente ambas
     def __repr__(self):
         return '{}: {}'.format(self.cost, self.destination.label)
-
+        #Funçao que devolve a string no qual vamos ter a aresta do vertice, distancia e
+        #a cidade de destino
 
 Aveiro = Node('Aveiro')
 Braga = Node('Braga')
