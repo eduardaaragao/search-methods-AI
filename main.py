@@ -1,7 +1,10 @@
 # Artificial Intelligence
 from cities import *
+from queue import PriorityQueue
 
 connected_cities = get_connected_cities()
+straight_line_cities = get_straight_line_cities()
+FaroStraightDistance = get_FaroStraightDistance()
 
 # Maria Aragão - 18545
 
@@ -28,9 +31,37 @@ def menu_a_star():
     destination = 'Faro'
     pass
 
+def return_distance(source_city, destination_city, distanceObj):
+    return distanceObj.get((source_city, destination_city)) if distanceObj else 1
 
-def menu_sophrega_search():
-    pass
+def heuristic_search(graph, source_city, destination_city,straightDistance):
+    border = PriorityQueue() #cities that does border with city that we are iterating
+    border.put((0, source_city, source_city)) #First City
+    path_traveled = "" #final path traveled
+    print('\nIteração 0')
+    print(source_city)
+    i = 1
+    while True:
+
+        value, actual_node, path = border.get() #Get node with the smaller value
+        border.queue.clear()  # Delete border cities from last city visited
+
+        if actual_node == destination_city:
+            print('-' * 100)
+            print('Cidade destino escolhida ' + destination_city)
+            print('Caminho percorrido ' + path_traveled + '.')
+            print('Fim')
+            return
+
+        print('-' * 100)
+        print('Iteração ' + str(i))
+        for node in graph[actual_node]:
+            border.put((return_distance(node, destination_city, straightDistance), node, path + " -> " + node)) # Add border cities to the queue
+            path_traveled = str(border.queue[0][2])
+        print(sorted(border.queue)) #Sort by value
+        if border.queue[0][1] is not destination_city:
+            print('Ir para a cidade: ' + str(border.queue[0][1] + '.'))
+        i = i + 1
 
 
 def menu_uniform_cost():
@@ -102,15 +133,6 @@ def Menu():
         print("Welcome", end="")
         print("="*10)
 
-        verifyCity = False
-        while verifyCity == False:
-            destination = input('\nInsira a cidade de destino: ')
-            verifyCity = verifyCityGraph(destination)
-        verifyCity = False
-        while verifyCity == False:
-            origin = input('\nInsira a cidade de origem:  ')
-            verifyCity = verifyCityGraph(destination)
-
         print('1 -------------------- Profundidade Limitada')
         print('2 -------------------- Custo uniforme')
         print('3 -------------------- Procura sôfrega(Destino: Faro)')
@@ -118,15 +140,24 @@ def Menu():
 
         method = input('Please choose the searching method: ')
 
+        verifyCity = False
+        while verifyCity == False:
+            origin = input('\nInsira a cidade de origem:  ')
+            verifyCity = verifyCityGraph(origin)
+
         if method == '1':
+            verifyCity = False
+            while verifyCity == False:
+                destination = input('\nInsira a cidade de destino: ')
+                verifyCity = verifyCityGraph(destination)
+
             verifyNumberVar = False
             while verifyNumberVar == False:
                 level_limit = input('\nInsira o limite máximo de cidades a percorrer:  ')
                 verifyNumberVar = verifyNumber(level_limit)
             depth_limited(connected_cities, origin, destination, level_limit)
         elif method == '3':
-            # Implementação: Maria Eduarda
-            menu_a_star()
+            heuristic_search(straight_line_cities, origin, "Faro", FaroStraightDistance)
 
 
 Menu()

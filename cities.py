@@ -45,3 +45,45 @@ def get_straight_line_cities():
     }
 
     return straight_line_cities
+
+
+def get_FaroStraightDistance():
+    distance = {
+        ('Faro', 'Aveiro'): 366,
+        ('Faro', 'Braga'): 454,
+        ('Faro', 'Bragança'): 487,
+        ('Faro', 'Beja'): 99,
+        ('Faro', 'Castelo Branco'): 280,
+        ('Faro', 'Coimbra'): 319,
+        ('Faro', 'Évora'): 157,
+        ('Faro', 'Faro'): 0,
+        ('Faro', 'Guarda'): 352,
+        ('Faro', 'Leiria'): 278,
+        ('Faro', 'Lisboa'): 195,
+        ('Faro', 'Portalegre'): 228,
+        ('Faro', 'Porto'): 418,
+        ('Faro', 'Santarém'): 231,
+        ('Faro', 'Setúbal'): 168,
+        ('Faro', 'Viana'): 473,
+        ('Faro', 'Vila Real'): 429,
+        ('Faro', 'Viseu'): 363,
+        ('Aveiro', 'Faro'): 366,
+        ('Braga', 'Faro'): 454,
+        ('Bragança', 'Faro'): 487,
+        ('Beja', 'Faro'): 99,
+        ('Castelo Branco', 'Faro'): 280,
+        ('Coimbra', 'Faro'): 319,
+        ('Évora', 'Faro'): 157,
+        ('Guarda', 'Faro'): 352,
+        ('Leiria', 'Faro'): 278,
+        ('Lisboa', 'Faro'): 195,
+        ('Portalegre', 'Faro'): 228,
+        ('Porto', 'Faro'): 418,
+        ('Santarém', 'Faro'): 231,
+        ('Setúbal', 'Faro'): 168,
+        ('Viana do Castelo', 'Faro'): 473,
+        ('Vila Real', 'Faro'): 429,
+        ('Viseu', 'Faro'): 363
+
+    }
+    return distance
