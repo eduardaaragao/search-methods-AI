@@ -152,6 +152,16 @@ def depth_limited(graph, source_city, destination_city, level_limit):
 
 def Menu():
     while True:
+        print("Welcome to ", end="")
+        print("="*10)
+        destination = input('Enter the destination location: ')
+        origin = input('Enter the origin location:  ')
+
+        print('1 -------------------- Depth Limited')
+        print('2 -------------------- Uniform Cost')
+        print('3 -------------------- Sophrega Search')
+        print('4 -------------------- A*')
+
         print()
         print("Welcome", end="")
         print("=" * 10)
@@ -159,6 +169,7 @@ def Menu():
         print('2 -------------------- Custo uniforme')
         print('3 -------------------- Procura sôfrega(Destino: Faro)')
         print('4 -------------------- A*(Destino: Faro)')
+
 
         method = input('Please choose the searching method: ')
 
@@ -168,6 +179,11 @@ def Menu():
             verifyCity = verifyCityGraph(origin)
 
         if method == '1':
+            menu_depth_limited()
+            break
+        elif method == '3':
+            menu_a_star()
+
             verifyCity = False
             while verifyCity == False:
                 destination = input('\nInsira a cidade de destino: ')
