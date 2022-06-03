@@ -23,7 +23,7 @@ def menu_depth_limited():
 
 def Menu():
     while True:
-        print("Welcome", end="")
+        print("Welcome to ", end="")
         print("="*10)
         destination = input('Enter the destination location: ')
         origin = input('Enter the origin location:  ')
@@ -36,10 +36,10 @@ def Menu():
         method = input('Please choose the searching method: ')
 
         if method == '1':
+            # Implementação: Maria Eduarda
             menu_depth_limited()
             break
         elif method == '3':
-            # Implementação: Maria Eduarda
             menu_a_star()
 
 
