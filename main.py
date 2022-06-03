@@ -161,6 +161,7 @@ def Menu():
         print('2 -------------------- Uniform Cost')
         print('3 -------------------- Sophrega Search')
         print('4 -------------------- A*')
+
         print()
         print("Welcome", end="")
         print("=" * 10)
@@ -168,6 +169,7 @@ def Menu():
         print('2 -------------------- Custo uniforme')
         print('3 -------------------- Procura sôfrega(Destino: Faro)')
         print('4 -------------------- A*(Destino: Faro)')
+
 
         method = input('Please choose the searching method: ')
 
@@ -182,6 +184,8 @@ def Menu():
             break
         elif method == '3':
             menu_a_star()
+
+
             verifyCity = False
             while verifyCity == False:
                 destination = input('\nInsira a cidade de destino: ')
