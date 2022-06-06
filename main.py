@@ -92,6 +92,15 @@ def menu_uniform_cost(origin, destination):
     queue = PriorityQueue()
     queue.put((0, [root]))
     # com este while vamos iterar os itens que estao na queue
+    #recebemos as variaveis do input do menu, e convertemos o destino para variavel
+    #para que o possa invocar do graph
+    strOrigem = origin
+    destino = destination
+    origem = globals()[strOrigem]
+    # aqui criamos a prirodade de queue dos caminhos
+    queue = PriorityQueue()
+    queue.put((0, [origem]))
+    #com este while vamos iterar os itens que estao na queue
     while not queue.empty():
         # obter o item de mais alta prioridade
         pair = queue.get()
@@ -107,6 +116,18 @@ def menu_uniform_cost(origin, destination):
             new_path.append(edge.destination)
             # depois ligamos o novo caminho a queue com prioridade
             queue.put((pair[0] + edge.cost, new_path))
+        #se for o destino que queremos, devolvemos o caminho
+        if current.nome == destino:
+            print(teste)
+            return pair[1]
+        #senao vamos adicionar todas as arestas, distancias entre cidades, a queue
+        for caminho in current.children:
+            #criamos um novo caminho com a cidade e a distancia
+            novoCaminho = list(pair[1])
+            novoCaminho.append(caminho.destino)
+            #depois ligamos o novo caminho a queue com prioridade
+            queue.put((pair[0] + caminho.custo, novoCaminho))
+
     pass
 
 

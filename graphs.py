@@ -1,60 +1,50 @@
-class Node(object):
-    #Classe para definir os vértices/cidades
-    def __init__(self, label: str = None):
-        self.label = label
+class Cidade(object): #Criar a classe para definir os vértices
+    def __init__(self, nome: str = None):
+        self.nome = nome
         self.children = []
-        #Inicializar um vertice, as cidades neste caso, e definir a sua label para o identificar
 
-    def __lt__(self, other):
-        return self.label < other.label
-        #Fazer a função de menor que, onde se compara o vertice presente com outro
+    def __lt__(self, destino):
+        return self.nome < destino.nome
 
-    def __gt__(self, other):
-        return self.label > other.label
-        #Fazer a função de maior que, onde se compara o vertice presente com outro
+    def __gt__(self, destino):
+        return self.nome > destino.nome
+
     def __repr__(self):
-        return '{} -> {}'.format(self.label, self.children)
-        #Funçao que devolve a string no qual vamos ter o vertice que estamos analizar
-        #e os outros vertices ao qual o mesmo esta ligado, neste caso vai ser a cidade
-        #e as cidades as quais esta ligada
+        return '{} -> {}'.format(self.nome, self.children)
 
-    def add_child(self, node, cost=1):
-        edge = Edge(self, node, cost)
-        self.children.append(edge)
-        #adicionar um subvertice, neste caso sao as cidades as quais a cidade a
-        #ser analizada está ligada, onde definimos a distancia e o nome da cidade
+    def add_child(self, cidade, custo=1):
+        caminho = Caminho(self, cidade, custo)
+        self.children.append(caminho)
 
-class Edge(object):
-    #Classe para definir as arestas/distancia entre cidades
-    def __init__(self, source: Node, destination: Node, cost: int = 1):
-        self.source = source
-        self.destination = destination
-        self.cost = cost
-        #Funcao para inicializar uma aresta, neste caso a distancia entre cidades
-        #onde definimos a cidade de origem, cidade de destino e a distancia ente ambas
+class Caminho(object):
+    def __init__(self, origem: Cidade, destino: Cidade, custo: int = 1):
+        self.origem = origem
+        self.destino = destino
+        self.custo = custo
+
     def __repr__(self):
-        return '{}: {}'.format(self.cost, self.destination.label)
-        #Funçao que devolve a string no qual vamos ter a aresta do vertice, distancia e
-        #a cidade de destino
+        return '{}: {}'.format(self.custo, self.destino.nome)
 
-Aveiro = Node('Aveiro')
-Braga = Node('Braga')
-Bragança = Node('Bragança')
-Beja = Node('Beja')
-CasteloBranco = Node('Castelo Branco')
-Coimbra = Node('Coimbra')
-Évora = Node('Évora')
-Faro = Node('Faro')
-Guarda = Node('Guarda')
-Leiria = Node('Leiria')
-Lisboa = Node('Lisboa')
-Porto = Node('Porto')
-VilaReal = Node('Vila Real')
-Viseu = Node('Viseu')
-Setúbal = Node('Setúbal')
-VianaDoCastelo = Node('Viana do Castelo')
-Santarém = Node('Santarém')
-Portalegre = Node('Portalegre')
+
+
+Aveiro = Cidade('Aveiro')
+Braga = Cidade('Braga')
+Bragança = Cidade('Bragança')
+Beja = Cidade('Beja')
+CasteloBranco = Cidade('Castelo Branco')
+Coimbra = Cidade('Coimbra')
+Évora = Cidade('Évora')
+Faro = Cidade('Faro')
+Guarda = Cidade('Guarda')
+Leiria = Cidade('Leiria')
+Lisboa = Cidade('Lisboa')
+Porto = Cidade('Porto')
+VilaReal = Cidade('Vila Real')
+Viseu = Cidade('Viseu')
+Setúbal = Cidade('Setúbal')
+VianaDoCastelo = Cidade('Viana do Castelo')
+Santarém = Cidade('Santarém')
+Portalegre = Cidade('Portalegre')
 
 Aveiro.add_child(Porto, 68)
 Aveiro.add_child(Viseu, 95)
