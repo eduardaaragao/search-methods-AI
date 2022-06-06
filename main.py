@@ -92,43 +92,21 @@ def menu_uniform_cost(origin, destination):
     queue = PriorityQueue()
     queue.put((0, [root]))
     # com este while vamos iterar os itens que estao na queue
-    #recebemos as variaveis do input do menu, e convertemos o destino para variavel
-    #para que o possa invocar do graph
-    strOrigem = origin
-    destino = destination
-    origem = globals()[strOrigem]
-    # aqui criamos a prirodade de queue dos caminhos
-    queue = PriorityQueue()
-    queue.put((0, [origem]))
-    #com este while vamos iterar os itens que estao na queue
     while not queue.empty():
         # obter o item de mais alta prioridade
         pair = queue.get()
         current = pair[1][-1]
         # se for o destino que queremos, devolvemos o caminho
-        if current.label == goal:
+        if current.nome == destination:
             print(pair[1])
             return pair[1]
         # senao vamos adicionar todas as arestas, distancias entre cidades, a queue
-        for edge in current.children:
-            # criamos um novo caminho com a cidade e a distancia
-            new_path = list(pair[1])
-            new_path.append(edge.destination)
-            # depois ligamos o novo caminho a queue com prioridade
-            queue.put((pair[0] + edge.cost, new_path))
-        #se for o destino que queremos, devolvemos o caminho
-        if current.nome == destino:
-            print(teste)
-            return pair[1]
-        #senao vamos adicionar todas as arestas, distancias entre cidades, a queue
         for caminho in current.children:
-            #criamos um novo caminho com a cidade e a distancia
+            # criamos um novo caminho com a cidade e a distancia
             novoCaminho = list(pair[1])
             novoCaminho.append(caminho.destino)
-            #depois ligamos o novo caminho a queue com prioridade
+            # depois ligamos o novo caminho a queue com prioridade
             queue.put((pair[0] + caminho.custo, novoCaminho))
-
-    pass
 
 
 def depth_limited(graph, source_city, destination_city, level_limit):
@@ -202,26 +180,16 @@ def Menu():
         print('4 -------------------- A*(Destino: Faro)')
 
         method = input('Por favor, escolha o método de procura que deseja: ')
-
-        # verify_city = False
-        # while not verify_city:
-        #    origin = input('\nInsira a cidade de origem:  ')
-        #    verify_city = verifyCityGraph(origin)
+        verify_city = False
+        while not verify_city:
+            origin = input('\nInsira a cidade de origem: ')
+            verify_city = verifyCityGraph(origin)
 
         if method == '1':
-            #  menu_depth_limited()
-            break
-        elif method == '4':
-            menu_a_star()
-
-
-Menu()
-
-''' verify_city = False
+            verifyCity = False
             while not verifyCity:
                 destination = input('\nInsira a cidade de destino: ')
-                verify_city = verifyCityGraph(destination)
-
+                verifyCity = verifyCityGraph(destination)
             verifyNumberVar = False
             while not verifyNumberVar:
                 level_limit = input('\nInsira o limite máximo de cidades a percorrer:  ')
@@ -234,4 +202,9 @@ Menu()
                 verifyCity = verifyCityGraph(destination)
             menu_uniform_cost(origin, destination)
         elif method == '3':
-            heuristic_search(straight_line_cities, origin, "Faro", FaroStraightDistance)'''
+            heuristic_search(straight_line_cities, origin, "Faro", FaroStraightDistance)
+        elif method == '4':
+            print("4")
+
+
+Menu()
