@@ -66,28 +66,29 @@ def heuristic_search(graph, source_city, destination_city,straightDistance):
 def menu_uniform_cost(origin, destination):
     #recebemos as variaveis do input do menu, e convertemos o destino para variavel
     #para que o possa invocar do graph
-    strRoot = origin
-    goal = destination
-    root = globals()[strRoot]
+    strOrigem = origin
+    destino = destination
+    origem = globals()[strOrigem]
     # aqui criamos a prirodade de queue dos caminhos
     queue = PriorityQueue()
-    queue.put((0, [root]))
+    queue.put((0, [origem]))
     #com este while vamos iterar os itens que estao na queue
     while not queue.empty():
         #obter o item de mais alta prioridade
         pair = queue.get()
         current = pair[1][-1]
         #se for o destino que queremos, devolvemos o caminho
-        if current.label == goal:
-            print(pair[1])
+        if current.nome == destino:
+            print(teste)
             return pair[1]
         #senao vamos adicionar todas as arestas, distancias entre cidades, a queue
-        for edge in current.children:
+        for caminho in current.children:
             #criamos um novo caminho com a cidade e a distancia
-            new_path = list(pair[1])
-            new_path.append(edge.destination)
+            novoCaminho = list(pair[1])
+            novoCaminho.append(caminho.destino)
             #depois ligamos o novo caminho a queue com prioridade
-            queue.put((pair[0] + edge.cost, new_path))
+            queue.put((pair[0] + caminho.custo, novoCaminho))
+
     pass
 
 
