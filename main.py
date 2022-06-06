@@ -164,7 +164,7 @@ def depth_limited(graph, source_city, destination_city, level_limit):
         if len(border) == 0:
             print("\n")
             print("*" * 150)
-            print("\nNão foi encontrado itenerário dentro do limite máximo de cidades a percorrer.\n")
+            print("\nNão foi encontrado itenerário dentro do limite máximo de cidades a percorrer.\n\n")
             return
 
         i = i + 1
@@ -178,14 +178,15 @@ def Menu():
         print('2 -------------------- Custo uniforme')
         print('3 -------------------- Procura sôfrega(Destino: Faro)')
         print('4 -------------------- A*(Destino: Faro)')
+        print('0 -------------------- Sair')
 
         method = input('Por favor, escolha o método de procura que deseja: ')
-        verify_city = False
-        while not verify_city:
-            origin = input('\nInsira a cidade de origem: ')
-            verify_city = verifyCityGraph(origin)
 
         if method == '1':
+            verify_city = False
+            while not verify_city:
+                origin = input('\nInsira a cidade de origem: ')
+                verify_city = verifyCityGraph(origin)
             verifyCity = False
             while not verifyCity:
                 destination = input('\nInsira a cidade de destino: ')
@@ -196,15 +197,28 @@ def Menu():
                 verifyNumberVar = verifyNumber(level_limit)
             depth_limited(connected_cities, origin, destination, level_limit)
         elif method == '2':
+            verify_city = False
+            while not verify_city:
+                origin = input('\nInsira a cidade de origem: ')
+                verify_city = verifyCityGraph(origin)
             verifyCity = False
             while not verifyCity:
                 destination = input('\nInsira a cidade de destino: ')
                 verifyCity = verifyCityGraph(destination)
             menu_uniform_cost(origin, destination)
         elif method == '3':
+            verify_city = False
+            while not verify_city:
+                origin = input('\nInsira a cidade de origem: ')
+                verify_city = verifyCityGraph(origin)
             heuristic_search(straight_line_cities, origin, "Faro", FaroStraightDistance)
         elif method == '4':
-            print("4")
+            menu_a_star()
+        elif method == '0':
+            break
+        else:
+            print('\nEscolha uma opção válida\n')
+            pass
 
 
 Menu()
