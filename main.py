@@ -117,7 +117,7 @@ def depth_limited(graph, source_city, destination_city, level_limit):
     )
     visited = []  # Cities already visited
 
-    if (int(level_limit) == 0):
+    if int(level_limit) == 0:
         print("\n")
         print("*" * 150)
         print("\nLimite é de 0 cidades para percorrer")
@@ -170,6 +170,53 @@ def depth_limited(graph, source_city, destination_city, level_limit):
         i = i + 1
 
 
+def menu_custo_uniforme():
+    origin = ''
+    destination = ''
+    verify_city = verifyCityGraph(origin)
+
+    while not verify_city:
+        origin = input('\nInsira a cidade de origem: ')
+        verify_city = verifyCityGraph(origin)
+
+    verify_city = False
+    while not verify_city:
+        destination = input('\nInsira a cidade de destino: ')
+        verify_city = verifyCityGraph(destination)
+    menu_uniform_cost(origin, destination)
+
+
+def menu_profundidade_limitada():
+    origin = ''
+    destination = ''
+
+    verify_city = verifyCityGraph(origin)
+
+    while not verify_city:
+        origin = input('\nPor favor, insira a cidade de origem: ')
+        verify_city = verifyCityGraph(origin)
+
+    verify_city = False
+
+    while not verify_city:
+        destination = input('\nPor favor, insira a cidade de destino: ')
+        verify_city = verifyCityGraph(destination)
+
+    level_limit = input('\nInsira o limite máximo de cidades a percorrer:  ')
+
+    depth_limited(connected_cities, origin, destination, level_limit)
+
+
+def menu_procura_sofrega():
+    origin = ''
+    verify_city = verifyCityGraph(origin)
+
+    while not verify_city:
+        origin = input('\nInsira a cidade de origem: ')
+        verify_city = verifyCityGraph(origin)
+    heuristic_search(straight_line_cities, origin, "Faro", FaroStraightDistance)
+
+
 def Menu():
     print("*" * 100)
     print("Bem vindo")
@@ -183,42 +230,18 @@ def Menu():
         method = input('Por favor, escolha o método de procura que deseja: ')
 
         if method == '1':
-            verify_city = False
-            while not verify_city:
-                origin = input('\nInsira a cidade de origem: ')
-                verify_city = verifyCityGraph(origin)
-            verifyCity = False
-            while not verifyCity:
-                destination = input('\nInsira a cidade de destino: ')
-                verifyCity = verifyCityGraph(destination)
-            verifyNumberVar = False
-            while not verifyNumberVar:
-                level_limit = input('\nInsira o limite máximo de cidades a percorrer:  ')
-                verifyNumberVar = verifyNumber(level_limit)
-            depth_limited(connected_cities, origin, destination, level_limit)
+            menu_profundidade_limitada()
         elif method == '2':
-            verify_city = False
-            while not verify_city:
-                origin = input('\nInsira a cidade de origem: ')
-                verify_city = verifyCityGraph(origin)
-            verifyCity = False
-            while not verifyCity:
-                destination = input('\nInsira a cidade de destino: ')
-                verifyCity = verifyCityGraph(destination)
-            menu_uniform_cost(origin, destination)
+            menu_custo_uniforme()
         elif method == '3':
-            verify_city = False
-            while not verify_city:
-                origin = input('\nInsira a cidade de origem: ')
-                verify_city = verifyCityGraph(origin)
-            heuristic_search(straight_line_cities, origin, "Faro", FaroStraightDistance)
+            menu_procura_sofrega()
         elif method == '4':
             menu_a_star()
         elif method == '0':
+            print('Tchauzinho =)')
             break
         else:
-            print('\nEscolha uma opção válida\n')
-            pass
+            print('Opção não válida.')
 
 
 Menu()
